@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bticmvxfsljmn"]
+
+[ext_resource type="Script" path="res://scripts/camera_movement.gd" id="1_ra1rr"]
+[ext_resource type="PackedScene" uid="uid://cx0214wlpk1c2" path="res://assets/charizard.tscn" id="2_clnr6"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_si6or"]
+
+[node name="TestScene" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_si6or")
+
+[node name="Camera3D" type="Camera3D" parent="." groups=["scene_camera"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.441291, 1.30931)
+script = ExtResource("1_ra1rr")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.885827, 0.0606669)
+
+[node name="Charizard" parent="." instance=ExtResource("2_clnr6")]
