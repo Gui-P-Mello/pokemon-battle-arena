@@ -19,14 +19,14 @@ var time_to_reach: float = 0.1
 var use_z: bool
 
 
-func _init(agent: GSAISteeringAgent, _target: GSAIAgentLocation, _use_z := false).(agent) -> void:
-	self.use_z = _use_z
-	self.target = _target
+func _init(agent: GSAISteeringAgent, _target: GSAIAgentLocation, _use_z: bool = false) -> void:
+	super._init(agent)
+	use_z = _use_z
+	target = _target
 
 
 func _match_orientation(acceleration: GSAITargetAcceleration, desired_orientation: float) -> void:
-	var rotation := wrapf(desired_orientation - agent.orientation, -PI, PI)
-
+	var rotation := wrap(desired_orientation - agent.orientation, -PI, PI)
 	var rotation_size := abs(rotation)
 
 	if rotation_size <= alignment_tolerance:
@@ -38,12 +38,11 @@ func _match_orientation(acceleration: GSAITargetAcceleration, desired_orientatio
 			desired_rotation *= rotation_size / deceleration_radius
 
 		desired_rotation *= rotation / rotation_size
+		acceleration.angular = (desired_rotation - agent.angular_velocity) / time_to_reach
 
-		acceleration.angular = ((desired_rotation - agent.angular_velocity) / time_to_reach)
-
-		var limited_acceleration := abs(acceleration.angular)
+		var limited_acceleration := absf(acceleration.angular)
 		if limited_acceleration > agent.angular_acceleration_max:
-			acceleration.angular *= (agent.angular_acceleration_max / limited_acceleration)
+			acceleration.angular *= agent.angular_acceleration_max / limited_acceleration
 
 	acceleration.linear = Vector3.ZERO
 

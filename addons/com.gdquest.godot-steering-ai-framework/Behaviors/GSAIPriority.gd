@@ -4,7 +4,7 @@
 class_name GSAIPriority
 extends GSAISteeringBehavior
 
-var _behaviors := []
+var _behaviors: Array[GSAISteeringBehavior] = []
 
 # The index of the last behavior the container prioritized.
 var last_selected_index: int
@@ -13,8 +13,9 @@ var last_selected_index: int
 var zero_threshold: float
 
 
-func _init(agent: GSAISteeringAgent, _zero_threshold := 0.001).(agent) -> void:
-	self.zero_threshold = _zero_threshold
+func _init(agent: GSAISteeringAgent, _zero_threshold: float = 0.001) -> void:
+	super._init(agent)
+	zero_threshold = _zero_threshold
 
 
 # Appends a steering behavior as a child of this container.
@@ -25,26 +26,24 @@ func add(behavior: GSAISteeringBehavior) -> void:
 # Returns the behavior at the position in the pool referred to by `index`, or
 # `null` if no behavior was found.
 func get_behavior_at(index: int) -> GSAISteeringBehavior:
-	if _behaviors.size() > index:
+	if index < _behaviors.size():
 		return _behaviors[index]
-	printerr("Tried to get index " + str(index) + " in array of size " + str(_behaviors.size()))
+	push_error("Tried to get index %d in array of size %d" % [index, _behaviors.size()])
 	return null
 
 
 func _calculate_steering(accel: GSAITargetAcceleration) -> void:
 	var threshold_squared := zero_threshold * zero_threshold
-
 	last_selected_index = -1
 
-	var size := _behaviors.size()
-
-	if size > 0:
-		for i in range(size):
-			last_selected_index = i
-			var behavior: GSAISteeringBehavior = _behaviors[i]
-			behavior.calculate_steering(accel)
-
-			if accel.get_magnitude_squared() > threshold_squared:
-				break
-	else:
+	if _behaviors.is_empty():
 		accel.set_zero()
+		return
+
+	for i in _behaviors.size():
+		last_selected_index = i
+		var behavior := _behaviors[i]
+		behavior.calculate_steering(accel)
+		
+		if accel.get_magnitude_squared() > threshold_squared:
+			break

@@ -15,7 +15,8 @@ var deceleration_radius: float
 var time_to_reach := 0.1
 
 
-func _init(agent: GSAISteeringAgent, _target: GSAIAgentLocation).(agent) -> void:
+func _init(agent: GSAISteeringAgent, _target: GSAIAgentLocation) -> void:
+	super._init(agent)
 	self.target = _target
 
 
@@ -36,7 +37,7 @@ func _arrive(acceleration: GSAITargetAcceleration, target_position: Vector3) -> 
 		desired_velocity = ((desired_velocity - agent.linear_velocity) * 1.0 / time_to_reach)
 
 		acceleration.linear = GSAIUtils.clampedv3(desired_velocity, agent.linear_acceleration_max)
-		acceleration.angular = 0
+		acceleration.angular = 0.0
 
 
 func _calculate_steering(acceleration: GSAITargetAcceleration) -> void:

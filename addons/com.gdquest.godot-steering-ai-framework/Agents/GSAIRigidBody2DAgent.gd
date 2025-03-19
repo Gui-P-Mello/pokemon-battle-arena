@@ -5,7 +5,7 @@ extends GSAISpecializedAgent
 class_name GSAIRigidBody2DAgent
 
 # The RigidBody2D to keep track of
-var body: RigidBody2D setget _set_body
+var body: RigidBody2D : set = _set_body
 
 var _last_position: Vector2
 var _body_ref: WeakRef
@@ -13,11 +13,10 @@ var _body_ref: WeakRef
 
 func _init(_body: RigidBody2D) -> void:
 	if not _body.is_inside_tree():
-		yield(_body, "ready")
+		await _body.ready
 	self.body = _body
 
-	# warning-ignore:return_value_discarded
-	_body.get_tree().connect("physics_frame", self, "_on_SceneTree_frame")
+	_body.get_tree().physics_frame.connect(_on_SceneTree_physics_frame)
 
 
 # Moves the agent's `body` by target `acceleration`.
@@ -30,6 +29,7 @@ func _apply_steering(acceleration: GSAITargetAcceleration, _delta: float) -> voi
 	_applied_steering = true
 	_body.apply_central_impulse(GSAIUtils.to_vector2(acceleration.linear))
 	_body.apply_torque_impulse(acceleration.angular)
+	
 	if calculate_velocities:
 		linear_velocity = GSAIUtils.to_vector3(_body.linear_velocity)
 		angular_velocity = _body.angular_velocity
@@ -46,7 +46,7 @@ func _set_body(value: RigidBody2D) -> void:
 	orientation = _last_orientation
 
 
-func _on_SceneTree_frame() -> void:
+func _on_SceneTree_physics_frame() -> void:
 	var _body: RigidBody2D = _body_ref.get_ref()
 	if not _body:
 		return

@@ -1,5 +1,4 @@
-# Calculates an acceleration to take an agent to a target agent's position
-# directly.
+# Calculates an acceleration to take an agent to a target agent's position directly.
 # @category - Individual behaviors
 class_name GSAISeek
 extends GSAISteeringBehavior
@@ -8,8 +7,9 @@ extends GSAISteeringBehavior
 var target: GSAIAgentLocation
 
 
-func _init(agent: GSAISteeringAgent, _target: GSAIAgentLocation).(agent) -> void:
-	self.target = _target
+func _init(agent: GSAISteeringAgent, _target: GSAIAgentLocation) -> void:
+	super._init(agent)
+	target = _target
 
 
 func _calculate_steering(acceleration: GSAITargetAcceleration) -> void:
@@ -17,4 +17,4 @@ func _calculate_steering(acceleration: GSAITargetAcceleration) -> void:
 		(target.position - agent.position).normalized()
 		* agent.linear_acceleration_max
 	)
-	acceleration.angular = 0
+	acceleration.angular = 0.0

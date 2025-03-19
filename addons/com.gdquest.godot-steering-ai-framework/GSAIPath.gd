@@ -2,7 +2,7 @@
 # follow behaviors can use.
 # @category - Base types
 class_name GSAIPath
-extends Reference
+extends RefCounted
 
 # If `false`, the path loops.
 var is_open: bool
