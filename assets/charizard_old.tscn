@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cx0214wlpk1c2"]
+
+[ext_resource type="Script" path="res://scripts/pokemon.gd" id="1_21j6h"]
+[ext_resource type="Texture2D" uid="uid://clxwihhej3sbk" path="res://addons/pmd-collab/sprites/0006/Walk-Anim.png" id="2_8n75s"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3aboe"]
+radius = 0.551297
+height = 1.25611
+
+[node name="CharizardOld" type="CharacterBody3D"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+script = ExtResource("1_21j6h")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+offset = Vector2(0, -8)
+billboard = 2
+texture_filter = 0
+texture = ExtResource("2_8n75s")
+hframes = 4
+vframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_3aboe")

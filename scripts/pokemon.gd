@@ -1,4 +1,4 @@
-class_name Pokemon extends Node
+class_name Pokemon extends CharacterBody3D
 
 var _id: int
 var _species: int
@@ -11,23 +11,68 @@ var _sprite3D: Sprite3D
 var _scene_camera: Camera3D
 var _current_animation_sprite_sheet: Texture
 @export var anim_col = 0
+var _steering_agent: GSAICharacterBody3DAgent
+var arrive_behavior: GSAIArrive
+@export var _target: Node3D
+var _steering_target: GSAISteeringAgent
+var arrive_blend: GSAIBlend
+var priority: GSAIPriority
 
+var angular_velocity:= 0.0
+var angular_drag:= 1
 
 func _ready():
-	_character_body = $CharacterBody3D
-	_sprite3D = $CharacterBody3D/Sprite3D
+	_character_body = self
+	_sprite3D = $Sprite3D
 	_scene_camera = get_tree().get_first_node_in_group("scene_camera")
+	_steering_agent = await  GSAICharacterBody3DAgent.new(_character_body)
+	_steering_agent.linear_speed_max = 5.0
+	_steering_agent.linear_acceleration_max = 2.0
+	_steering_agent.angular_speed_max = deg_to_rad(180) #turn speed in degrees per second
+	_steering_agent.angular_acceleration_max = deg_to_rad(620)
+	_steering_agent.bounding_radius = 0.5
+	_steering_agent.apply_linear_drag = 10
+	
+	_steering_target = GSAISteeringAgent.new()
+	_steering_target.position = _target.position
+	arrive_behavior = GSAIArrive.new(_steering_agent, _steering_target)
+	
+	var face = GSAIFace.new(_steering_agent, _steering_target, true)
+	face.alignment_tolerance = deg_to_rad(3)
+	face.deceleration_radius = deg_to_rad(15)
+	
+	priority = GSAIPriority.new(_steering_agent)
+	
+	arrive_blend = GSAIBlend.new(_steering_agent)
+	arrive_blend.add(face, 1.0)
+	arrive_blend.add(arrive_behavior, 1.0)
+	
+	priority.add(arrive_blend)
+
+func _physics_process(delta):
+	#print(self.rotation)
+	if self.position.distance_to(_target.position) >= 2:
+		arrive_blend.is_enabled = true
+		_steering_target.position = _target.position
+		var acceleration = GSAITargetAcceleration.new()
+		priority.calculate_steering(acceleration)
+		#Makes sure the character won't leave the ground or go below it regardless what the target's position.y value is
+		acceleration.linear.y = 0
+		_steering_agent._apply_steering(acceleration, delta)
+		
+		# We then do something similar to apply our agent's rotational speed.
+		angular_velocity = clamp(
+			angular_velocity + acceleration.angular * delta, -_steering_agent.angular_speed_max, _steering_agent.angular_speed_max
+		)
+		# This applies drag on the agent's rotation, helping it slow down naturally.
+		angular_velocity = lerp(angular_velocity, 0.0, angular_drag)
+		rotation += Vector3(0, angular_velocity * delta, 0)
+		print(angular_velocity)
+	else:
+		velocity = Vector3.ZERO
 
 func _process(delta):
 	_render_perspective()
-
-#func _init(id: int, species:int, types: Array, stamina: float, muscular_power: float, special_power: float):
-	#_id = id
-	#_species = species
-	#_types = types
-	#_stamina = stamina
-	#_muscular_power = muscular_power
-	#_special_power = special_power
 	
 func _render_perspective()->void:
 	if _scene_camera == null: 
@@ -35,8 +80,8 @@ func _render_perspective()->void:
 		return
 		
 	var c_forward = -_scene_camera.global_transform.basis.z
-	var forward = _sprite3D.global_transform.basis.z
-	var left = _sprite3D.global_transform.basis.x
+	var forward = _character_body.global_transform.basis.z
+	var left = _character_body.global_transform.basis.x
 	
 	var f_dot = forward.dot(c_forward)
 	var l_dot = left.dot(c_forward)

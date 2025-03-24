@@ -17,8 +17,7 @@ func _face(acceleration: GSAITargetAcceleration, target_position: Vector3) -> vo
 		acceleration.set_zero()
 	else:
 		var orientation: float = (
-			GSAIUtils.vector3_to_angle(to_target) 
-			if use_z 
+			GSAIUtils.vector3_to_angle(to_target) if use_z 
 			else GSAIUtils.vector2_to_angle(GSAIUtils.to_vector2(to_target)))
 		_match_orientation(acceleration, orientation)
 

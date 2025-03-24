@@ -111,6 +111,10 @@ func _apply_orientation_steering(angular_acceleration: float, delta: float) -> v
 	_body.rotation.y += velocity * delta
 	if calculate_velocities:
 		angular_velocity = velocity
+	# Rotação completa usando quaternion
+	#var angular_velocity_vec = Vector3(0, velocity, 0)  # Apenas Yaw
+	#_body.rotation += angular_velocity_vec * delta
+
 
 
 func _set_body(value: CharacterBody3D) -> void:
@@ -160,3 +164,4 @@ func _on_SceneTree_physics_frame() -> void:
 
 			_last_position = current_position
 			_last_orientation = current_orientation
+	#orientation = _body.rotation.y  # Mantenha para comportamentos 3D
