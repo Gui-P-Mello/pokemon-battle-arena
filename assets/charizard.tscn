@@ -1,23 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://cx0214wlpk1c2"]
+[gd_scene load_steps=4 format=3 uid="uid://dsx3hwync5mss"]
 
-[ext_resource type="Script" path="res://scripts/pokemon.gd" id="1_21j6h"]
-[ext_resource type="Texture2D" uid="uid://clxwihhej3sbk" path="res://addons/pmd-collab/sprites/0006/Walk-Anim.png" id="2_8n75s"]
+[ext_resource type="Script" path="res://scripts/pokemon.gd" id="1_58fhn"]
+[ext_resource type="Texture2D" uid="uid://clxwihhej3sbk" path="res://addons/pmd-collab/sprites/0006/Walk-Anim.png" id="1_dlt8u"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3aboe"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3c8lp"]
+radius = 0.673168
+height = 1.61829
 
-[node name="Charizard" type="Node"]
-script = ExtResource("1_21j6h")
+[node name="Charizard" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02075, 0)
+script = ExtResource("1_58fhn")
 
-[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.209792, 0)
+shape = SubResource("CapsuleShape3D_3c8lp")
 
-[node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D"]
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, -0.630924, 0)
 billboard = 2
 texture_filter = 0
-texture = ExtResource("2_8n75s")
+texture = ExtResource("1_dlt8u")
 hframes = 4
 vframes = 8
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody3D/Sprite3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
-shape = SubResource("CapsuleShape3D_3aboe")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite3D"]

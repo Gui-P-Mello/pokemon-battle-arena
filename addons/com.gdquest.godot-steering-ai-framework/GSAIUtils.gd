@@ -15,10 +15,12 @@ static func clampedv3(vector: Vector3, limit: float) -> Vector3:
 # This assumes orientation for 3D agents that are upright and rotate
 # around the Y axis.
 static func vector3_to_angle(vector: Vector3) -> float:
+	print("use_z = true")
 	return atan2(vector.x, vector.z)
 
 # Returns an angle in radians between the positive X axis and the `vector`.
 static func vector2_to_angle(vector: Vector2) -> float:
+	print("use_z = false")
 	return atan2(vector.x, -vector.y)
 
 # Returns a directional vector from the given orientation angle.
