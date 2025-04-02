@@ -21,9 +21,15 @@ var priority: GSAIPriority
 var angular_velocity:= 0.0
 var angular_drag:= 1
 
+var animated_sprite3D: AnimatedSprite3D
+var animation: Animation
+var animation_player: AnimationPlayer
+
 func _ready():
+	animated_sprite3D = $AnimatedSprite3D
 	_character_body = self
 	_sprite3D = $Sprite3D
+	animation_player = $Sprite3D/AnimationPlayer
 	_scene_camera = get_tree().get_first_node_in_group("scene_camera")
 	_steering_agent = await  GSAICharacterBody3DAgent.new(_character_body)
 	_steering_agent.linear_speed_max = 5.0
@@ -52,6 +58,7 @@ func _ready():
 func _physics_process(delta):
 	#print(self.rotation)
 	if self.position.distance_to(_target.position) >= 2:
+		animation_player.play("walk_anim")
 		arrive_blend.is_enabled = true
 		_steering_target.position = _target.position
 		var acceleration = GSAITargetAcceleration.new()
@@ -70,6 +77,8 @@ func _physics_process(delta):
 		print(angular_velocity)
 	else:
 		velocity = Vector3.ZERO
+		animation_player.play("strike_anim")
+		
 
 func _process(delta):
 	_render_perspective()
@@ -107,4 +116,14 @@ func _render_perspective()->void:
 				row = 7 #front left sprites row
 			else:
 				row = 5 # back left sprites row
-	_sprite3D.frame = anim_col + row * 4
+	_sprite3D.frame = anim_col + row * _sprite3D.hframes
+	
+	#animation
+	#animated_sprite3D.sprite_frames.get_frame_count("walk_anim")
+	#animated_sprite3D.sprite_frames
+	#animated_sprite3D.frame_changed
+	#animated_sprite3D.frame_progress
+	#animated_sprite3D
+	#animated_sprite3D
+	#_sprite3D.hframes
+	#_sprite3D.vframes

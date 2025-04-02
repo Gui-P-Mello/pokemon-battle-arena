@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://w55muhm8kq2f"
-path.s3tc="res://.godot/imported/Attack-Anim.png-bc58cfc5f6ea1eb57a3fa2e15453c3b5.s3tc.ctex"
+uid="uid://cniabppckimio"
+path.s3tc="res://.godot/imported/Strike-Anim-Edited.png-c6cf1b010f609bf5b31f605217ecd810.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/pmd-collab/sprites/0006/Attack-Anim.png"
-dest_files=["res://.godot/imported/Attack-Anim.png-bc58cfc5f6ea1eb57a3fa2e15453c3b5.s3tc.ctex"]
+source_file="res://addons/pmd-collab/sprites/0006/Strike-Anim-Edited.png"
+dest_files=["res://.godot/imported/Strike-Anim-Edited.png-c6cf1b010f609bf5b31f605217ecd810.s3tc.ctex"]
 
 [params]
 
