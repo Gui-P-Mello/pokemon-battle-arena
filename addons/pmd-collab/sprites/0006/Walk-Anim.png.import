@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://clxwihhej3sbk"
-path.s3tc="res://.godot/imported/Walk-Anim.png-077a382ccaa4056e074a0566cc0f544b.s3tc.ctex"
+path="res://.godot/imported/Walk-Anim.png-077a382ccaa4056e074a0566cc0f544b.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://addons/pmd-collab/sprites/0006/Walk-Anim.png"
-dest_files=["res://.godot/imported/Walk-Anim.png-077a382ccaa4056e074a0566cc0f544b.s3tc.ctex"]
+dest_files=["res://.godot/imported/Walk-Anim.png-077a382ccaa4056e074a0566cc0f544b.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

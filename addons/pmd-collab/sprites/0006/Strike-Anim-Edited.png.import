@@ -3,20 +3,19 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cniabppckimio"
-path.s3tc="res://.godot/imported/Strike-Anim-Edited.png-c6cf1b010f609bf5b31f605217ecd810.s3tc.ctex"
+path="res://.godot/imported/Strike-Anim-Edited.png-c6cf1b010f609bf5b31f605217ecd810.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://addons/pmd-collab/sprites/0006/Strike-Anim-Edited.png"
-dest_files=["res://.godot/imported/Strike-Anim-Edited.png-c6cf1b010f609bf5b31f605217ecd810.s3tc.ctex"]
+dest_files=["res://.godot/imported/Strike-Anim-Edited.png-c6cf1b010f609bf5b31f605217ecd810.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
