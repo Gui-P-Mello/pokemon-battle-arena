@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="ProjectileMove" load_steps=11 format=3 uid="uid://dqjnodtakg2l0"]
+
+[ext_resource type="Script" path="res://scripts/types/fire.gd" id="1_a4us0"]
+[ext_resource type="Script" path="res://scripts/moves/effects/damage_effect.gd" id="3_b0jfb"]
+[ext_resource type="PackedScene" uid="uid://dpotv64avbgeb" path="res://assets/moves/projectiles/projectile.tscn" id="3_fge0v"]
+[ext_resource type="Script" path="res://scripts/moves/projectile_move.gd" id="4_3xcn1"]
+[ext_resource type="Script" path="res://scripts/moves/effects/dot_effect.gd" id="4_oy2ig"]
+[ext_resource type="Script" path="res://scripts/moves/effects/shoot_projectile_effect.gd" id="4_sel32"]
+
+[sub_resource type="Resource" id="Resource_i6b61"]
+script = ExtResource("1_a4us0")
+
+[sub_resource type="Resource" id="Resource_jbx35"]
+script = ExtResource("4_sel32")
+
+[sub_resource type="Resource" id="Resource_r2luu"]
+script = ExtResource("3_b0jfb")
+
+[sub_resource type="Resource" id="Resource_fwx6l"]
+script = ExtResource("4_oy2ig")
+damage_per_second = 2.0
+effect_name = ""
+type = 0
+duration = 5.0
+stackable = false
+max_stacks = 0
+
+[resource]
+script = ExtResource("4_3xcn1")
+projectile = ExtResource("3_fge0v")
+projectile_speed = 10.0
+move_name = "FireBlast"
+move_type = SubResource("Resource_i6b61")
+animation_name = "shoot_anim"
+stamina_cost = 4.0
+charge_time = 0.0
+is_damage_physical = false
+base_damage = 5.0
+on_execute_move_effects = Array[Resource("res://scripts/moves/effects/effect.gd")]([SubResource("Resource_jbx35")])
+on_hit_effects = Array[Resource("res://scripts/moves/effects/effect.gd")]([SubResource("Resource_r2luu"), SubResource("Resource_fwx6l")])
