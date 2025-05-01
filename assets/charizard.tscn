@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dsx3hwync5mss"]
+[gd_scene load_steps=17 format=3 uid="uid://dsx3hwync5mss"]
 
 [ext_resource type="Script" path="res://scripts/pokemon.gd" id="1_58fhn"]
 [ext_resource type="Texture2D" uid="uid://clxwihhej3sbk" path="res://addons/pmd-collab/sprites/0006/Walk-Anim.png" id="1_dlt8u"]
+[ext_resource type="Texture2D" uid="uid://b6d30r0pn3wud" path="res://addons/pmd-collab/sprites/0006/Shoot-Anim.png" id="2_2ltqs"]
 [ext_resource type="Texture2D" uid="uid://cniabppckimio" path="res://addons/pmd-collab/sprites/0006/Strike-Anim-Edited.png" id="2_5wvb6"]
+[ext_resource type="Texture2D" uid="uid://bwyk3qai2qfrm" path="res://addons/pmd-collab/sprites/0006/Hurt-Anim.png" id="2_hk543"]
 [ext_resource type="Script" path="res://scripts/tools/animation_integration_hub.gd" id="3_0taub"]
 [ext_resource type="Texture2D" uid="uid://w55muhm8kq2f" path="res://addons/pmd-collab/sprites/0006/Attack-Anim.png" id="3_40vdm"]
 
@@ -77,6 +79,126 @@ tracks/3/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 }
 
+[sub_resource type="Animation" id="Animation_h0wj4"]
+resource_name = "idle_anim"
+
+[sub_resource type="Animation" id="Animation_xte63"]
+resource_name = "shoot_anim"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_2ltqs")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [11]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..:anim_col")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_move_execution"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_2kh64"]
+resource_name = "stagger_anim"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_hk543")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("..:anim_col")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
 [sub_resource type="Animation" id="Animation_q8nnb"]
 resource_name = "strike_anim"
 length = 1.4
@@ -127,6 +249,20 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"on_move_execution"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_caes4"]
@@ -186,6 +322,9 @@ tracks/3/keys = {
 _data = {
 "RESET": SubResource("Animation_ltv7p"),
 "attack_anim": SubResource("Animation_85p7h"),
+"idle_anim": SubResource("Animation_h0wj4"),
+"shoot_anim": SubResource("Animation_xte63"),
+"stagger_anim": SubResource("Animation_2kh64"),
 "strike_anim": SubResource("Animation_q8nnb"),
 "walk_anim": SubResource("Animation_caes4")
 }
@@ -201,6 +340,8 @@ shape = SubResource("CapsuleShape3D_3c8lp")
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, -0.630924, 0)
 billboard = 2
+shaded = true
+alpha_cut = 2
 texture_filter = 0
 texture = ExtResource("2_5wvb6")
 hframes = 13
@@ -212,3 +353,6 @@ libraries = {
 }
 autoplay = "walk_anim"
 script = ExtResource("3_0taub")
+
+[node name="CastPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.534)

@@ -1,7 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://cx0214wlpk1c2"]
+[gd_scene load_steps=6 format=3 uid="uid://cx0214wlpk1c2"]
 
 [ext_resource type="Script" path="res://scripts/pokemon.gd" id="1_21j6h"]
-[ext_resource type="Texture2D" uid="uid://clxwihhej3sbk" path="res://addons/pmd-collab/sprites/0006/Walk-Anim.png" id="2_8n75s"]
+[ext_resource type="Texture2D" uid="uid://bghllfi0j1fgv" path="res://addons/pmd-collab/sprites/0006/Faint-Anim.png" id="2_ogunj"]
+
+[sub_resource type="Animation" id="Animation_qs3ib"]
+resource_name = "new_animation"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uff8v"]
+_data = {
+"new_animation": SubResource("Animation_qs3ib")
+}
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3aboe"]
 radius = 0.551297
@@ -14,12 +22,17 @@ script = ExtResource("1_21j6h")
 [node name="Sprite3D" type="Sprite3D" parent="."]
 offset = Vector2(0, -8)
 billboard = 2
+shaded = true
+alpha_cut = 2
 texture_filter = 0
-texture = ExtResource("2_8n75s")
+texture = ExtResource("2_ogunj")
 hframes = 4
 vframes = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite3D"]
+libraries = {
+"": SubResource("AnimationLibrary_uff8v")
+}
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
