@@ -1,0 +1,21 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bq2d46hn1lgme"]
+
+[ext_resource type="Texture2D" uid="uid://clt1s8xkd15e5" path="res://assets/3d/006/charizard_model_pm0006_00_BodyA1.png" id="1_kct7x"]
+[ext_resource type="Material" uid="uid://c2t0ivxcjdbg7" path="res://assets/3d/outline_material.tres" id="2_iul2v"]
+
+[resource]
+resource_name = "Material__13.001"
+next_pass = ExtResource("2_iul2v")
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 2
+albedo_texture = ExtResource("1_kct7x")
+albedo_texture_force_srgb = true
+metallic_specular = 0.0
+roughness = 0.0
+emission_enabled = true
+clearcoat_roughness = 0.0
+subsurf_scatter_strength = 1.0
+refraction_enabled = true
+refraction_scale = 1.0
+texture_filter = 1

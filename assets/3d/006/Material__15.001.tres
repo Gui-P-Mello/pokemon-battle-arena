@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cl7ytgj2t51ay"]
+
+[ext_resource type="Texture2D" uid="uid://blop44nhi1bx4" path="res://assets/3d/006/charizard_model_pm0006_00_FireCoreA1.png" id="1_ffvgj"]
+
+[resource]
+resource_name = "Material__15.001"
+cull_mode = 2
+albedo_texture = ExtResource("1_ffvgj")
+roughness = 0.5

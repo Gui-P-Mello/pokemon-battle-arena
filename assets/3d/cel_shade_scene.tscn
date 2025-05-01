@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://da1nb0hat4bgy"]
+
+[ext_resource type="PackedScene" uid="uid://wk5nxekfi3v7" path="res://assets/3d/camera_3d.tscn" id="1_jvyc6"]
+[ext_resource type="PackedScene" uid="uid://dchvyrekd57e3" path="res://assets/3d/006/charizard.tscn" id="2_coqe7"]
+
+[node name="CelShadeScene" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 224, 302)
+
+[node name="charizard" parent="." instance=ExtResource("2_coqe7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.091095, -0.0816612, -0.0586433)
+
+[node name="Camera3D" parent="." instance=ExtResource("1_jvyc6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3773, 9.43268, 31.8752)

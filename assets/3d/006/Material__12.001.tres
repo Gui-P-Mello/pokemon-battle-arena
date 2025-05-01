@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dvf0v8lduvier"]
+
+[ext_resource type="Texture2D" uid="uid://b6dga86p321xe" path="res://assets/3d/006/charizard_model_pm0006_00_Eye1.png" id="1_2sirl"]
+
+[resource]
+resource_name = "Material__12.001"
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("1_2sirl")
+albedo_texture_force_srgb = true
+roughness = 0.0
+clearcoat_roughness = 0.0
+refraction_enabled = true
+texture_filter = 1
